@@ -5,15 +5,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return '<form action=/data><input name="id"></input><input type="submit"></input></form>'
+    return '<form action=/data>ID: <br><input name="id"></input><br>FILENAME:<br> <input name="filename"></input><input type="submit"></input></form>'
 
 def get_url_params():
     id_param = request.args.get('id')
-    return id_param
+    filename = request.args.get('filename')
+    return id_param, filename
 
 @app.route('/data', methods=['GET'])
 def get_query_string():
-    id_search = get_url_params()
+    id_search, filename = get_url_params()
     try:
         es = Elasticsearch([{'host': os.environ['ELK'], 'port': 9200}])
         res = es.search(index=os.environ['INDEX'], body={
@@ -50,7 +51,7 @@ def get_query_string():
         outstring = 'ID is not recognized'
         resp = make_response(outstring)
     resp.headers['Content-Type'] = 'text/plain'
-    resp.headers['Content-Disposition'] = 'attachment;filename="MyFileName.txt"'
+    resp.headers['Content-Disposition'] = 'attachment;filename="' + filename + '.txt"'
     return resp
 
 if __name__ == '__main__':
