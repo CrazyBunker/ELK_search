@@ -50,7 +50,7 @@ def get_query_string():
         outstring = 'ID is not recognized'
         resp = make_response(outstring)
     resp.headers['Content-Type'] = 'text/plain'
-    resp.headers['Content - Disposition'] = 'attachment;filename = "MyFileName.txt"'
+    resp.headers['Content-Disposition'] = 'attachment;filename="MyFileName.txt"'
     return resp
 
 if __name__ == '__main__':
