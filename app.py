@@ -30,18 +30,27 @@ def get_query_string():
             outstring = ''
             if '@timestamp' in source:
                 outstring += '@timestamp:' + str(source['@timestamp']) + "\n" + delimeter +"\n"
+            if 'api' in source:
+                outstring += 'API:' + str(source['api']) + "\n" + delimeter +"\n"
             if 'User' in source:
                 outstring += 'User:'+ str(source['User']) +"\n" + delimeter +"\n"
+            if 'request.url' in source:
+                outstring += 'Request URL:' + str(source['request.url'])+"\n" + delimeter +"\n"
             if 'RequestBody' in source:
                 outstring += 'RequestBody:' + str(source['RequestBody'])+"\n" + delimeter +"\n"
             if 'ResponseBody' in source:
                 outstring += 'ResponseBody:' + str(source['ResponseBody'])+"\n" + delimeter +"\n"
+            if 'response.body' in source
+                outstring += 'ResponseBody:' + str(source['response.body'])+"\n" + delimeter +"\n"
             if 'message' in source:
                 outstring += 'message:' + str(source['message']) + "\n" + delimeter +"\n"
             if 'exceptions' in source:
                 outstring += 'exceptions:' + str(source['exceptions']) + "\n" + delimeter +"\n"
+            if 'response.statusCode' in soure:
+                outstring += 'Response statusCode:' + str(source['response.statusCode']) + "\n" + delimeter +"\n"
             if 'TraceId' in source:
                 outstring += 'TraceId:' + str(source['TraceId']) + "\n" + delimeter +"\n"
+                
     except:
         outstring = 'Server is not resolved'
 
